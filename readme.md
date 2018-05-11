@@ -1,11 +1,8 @@
-1.centos7 °²×°vim8 ºÍYouCompleteMe
-	* 
-ÏÂÔØ±ØÒªµÄ°²×°×é¼ş
+# 1.centos7 å®‰è£…vim8 å’ŒYouCompleteMe #
 
+## ä¸‹è½½å¿…è¦çš„å®‰è£…ç»„ä»¶  ##
 
-    
-
-yum install -y gcc gcc-c++ ruby ruby-devel lua lua-devel  \
+    yum install -y gcc gcc-c++ ruby ruby-devel lua lua-devel  \
     ctags git python python-devel \
     tcl-devel ncurses-devel \
     perl perl-devel perl-ExtUtils-ParseXS \
@@ -13,336 +10,324 @@ yum install -y gcc gcc-c++ ruby ruby-devel lua lua-devel  \
     perl-ExtUtils-Embed
 
 	* 
-°²×°vim8
+## å®‰è£…vim8 ##
+
+
+    è®¿é—®https://github.com/vim/vim/releasesï¼Œä¸‹è½½æœ€æ–°çš„releaseç‰ˆæœ¬ï¼Œæˆ‘è¿™é‡Œæ˜¯vim-8.0.1645.tar.gz
 
+    tar zxvf vim-8.0.1645.tar.gz
+    cd vim-8.0.1645
+    
+    ./configure --with-features=huge \
+    --enable-multibyte \
+    --enable-rubyinterp=yes \
+    --enable-pythoninterp=yes \
+    --with-python-config-dir=/usr/lib64/python2.7/config \
+    --enable-perlinterp=yes \
+    --enable-luainterp=yes \
+    --enable-cscope \
+    --prefix=/usr/local
+    
+    make VIMRUNTIMEDIR=/usr/local/share/vim/vim80
+    make install
+    æ³¨æ„ï¼š --with-python-config-dirè¿™é¡¹è¦çœ‹è‡ªå·±çš„å®é™…è·¯å¾„ï¼Œæ˜¯python-develå¸¦çš„ç›®å½•
 
-        ·ÃÎÊhttps://github.com/vim/vim/releases£¬ÏÂÔØ×îĞÂµÄrelease°æ±¾£¬ÎÒÕâÀïÊÇvim-8.0.1645.tar.gz
 
-tar zxvf vim-8.0.1645.tar.gz
-cd vim-8.0.1645
+## æ›´æ”¹ä¸‹ç³»ç»Ÿç¼–è¾‘å™¨ ##
 
-./configure --with-features=huge \
-            --enable-multibyte \
-            --enable-rubyinterp=yes \
-            --enable-pythoninterp=yes \
-            --with-python-config-dir=/usr/lib64/python2.7/config \
-            --enable-perlinterp=yes \
-            --enable-luainterp=yes \
-            --enable-cscope \
-            --prefix=/usr/local
-            
-make VIMRUNTIMEDIR=/usr/local/share/vim/vim80
-make install
-         ×¢Òâ£º --with-python-config-dirÕâÏîÒª¿´×Ô¼ºµÄÊµ¼ÊÂ·¾¶£¬ÊÇpython-devel´øµÄÄ¿Â¼
+    sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
+    sudo update-alternatives --set editor /usr/local/bin/vim
+    sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
+    sudo update-alternatives --set vi /usr/local/bin/vim
 
-         ¸ü¸ÄÏÂÏµÍ³±à¼­Æ÷
 
-sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1
-sudo update-alternatives --set editor /usr/local/bin/vim
-sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/vim 1
-sudo update-alternatives --set vi /usr/local/bin/vim
+# å®‰è£…YouCompleteMe #
+ä¸‹è½½Vundle
+åˆ‡æ¢è¦å®‰è£…çš„ç”¨æˆ·
 
-	* 
-°²×°YouCompleteMe
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+é…ç½®~/.vimrcæ–‡ä»¶ï¼Œå¡«å…¥å¦‚ä¸‹å†…å®¹
 
+    set nocompatible  " be iMproved, required
+    filetype off  " required
+    
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    " alternatively, pass a path where Vundle should install plugins
+    "call vundle#begin('~/some/path/here')
+    
+    " let Vundle manage Vundle, required
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'Valloric/YouCompleteMe'
+    
+    
+    " All of your Plugins must be added before the following line
+    call vundle#end()" required
+    filetype plugin indent on" required
+    " To ignore plugin indent changes, instead use:
+    "filetype plugin on
+    "
+    " Brief help
+    " :PluginList   - lists configured plugins
+    " :PluginInstall- installs plugins; append `!` to update or just :PluginUpdate
+    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+    " :PluginClean  - confirms removal of unused plugins; append `!` to auto-approve removal
+    "
+    " see :h vundle for more details or wiki for FAQ
+    " Put your non-Plugin stuff after this line
 
-        ÏÂÔØVundle
 
-ÇĞ»»Òª°²×°µÄÓÃ»§
+ä¸‹è½½YouCompleteMe
 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-         ÅäÖÃ~/.vimrcÎÄ¼ş£¬ÌîÈëÈçÏÂÄÚÈİ
+æ‰“å¼€vimï¼Œè¾“å…¥å¦‚ä¸‹å‘½ä»¤
+    :PluginInstall
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+    æ³¨æ„ï¼š
+    1ã€è¿™é‡Œè€ƒéªŒç½‘é€Ÿï¼Œå¯èƒ½ä¼šæ¯”è¾ƒæ…¢ï¼Œä¸‹è½½å¥½åï¼Œæ•´ä¸ª.vimæ–‡ä»¶å¤¹å¤§çº¦150MBã€‚
+    2ã€libclangåº“å¯èƒ½ä¼šä¸‹è½½ä¸å…¨ï¼ˆsha256å€¼ä¸å¯¹ï¼‰ï¼Œå¯¼è‡´ä¸‹é¢ç¼–è¯‘YouCompleteMeæ—¶å‡ºé”™ï¼Œå¯ä»¥å…ˆç”¨è¿…é›·ä¸‹è½½ï¼Œå†æ›¿æ¢è¿‡å»ã€‚
+    ä¸‹è½½åœ°å€ï¼šhttps://dl.bintray.com/micbou/libclang/libclang-6.0.0-x86_64-linux-gnu-ubuntu-14.04.tar.bz2
+    ç›®çš„æ–‡ä»¶å¤¹ï¼š.vim/bundle/YouCompleteMe/third_party/ycmd/clang_archives/
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+##  ä¸‹è½½CMakeï¼ˆyumå®‰è£…çš„2.8ç‰ˆæœ¬ä¸è¡Œï¼‰ ##
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
 
+    è®¿é—®https://cmake.org/download/ï¼Œæˆ‘è¿™é‡Œæ˜¯cmake-3.10.3.tar.gz
+    è§£å‹ç¼–è¯‘å®‰è£…
+    tar zxvf cmake-3.10.3.tar.gz
+    cd cmake-3.10.3
+    ./bootstrap && make && make install
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
-	* 
-ÏÂÔØYouCompleteMe
 
+ ## ç¼–è¯‘YouCompleteMeï¼ˆæ”¯æŒC/C++ï¼‰ ##
 
 
-´ò¿ªvim£¬ÊäÈëÈçÏÂÃüÁî
-:PluginInstall
+    cd ~/.vim/bundle/YouCompleteMe/
+    ./install.py --clang-completer
+    ç¼–è¯‘å®Œæˆåï¼Œæ•´ä¸ª.vimæ–‡ä»¶å¤¹å¤§çº¦350MBã€‚
+    æ”¯æŒgolang
+    ./install.py --clang-completer --go-completer
 
-×¢Òâ£º
-1¡¢ÕâÀï¿¼ÑéÍøËÙ£¬¿ÉÄÜ»á±È½ÏÂı£¬ÏÂÔØºÃºó£¬Õû¸ö.vimÎÄ¼ş¼Ğ´óÔ¼150MB¡£
-2¡¢libclang¿â¿ÉÄÜ»áÏÂÔØ²»È«£¨sha256Öµ²»¶Ô£©£¬µ¼ÖÂÏÂÃæ±àÒëYouCompleteMeÊ±³ö´í£¬¿ÉÒÔÏÈÓÃÑ¸À×ÏÂÔØ£¬ÔÙÌæ»»¹ıÈ¥¡£
-ÏÂÔØµØÖ·£ºhttps://dl.bintray.com/micbou/libclang/libclang-6.0.0-x86_64-linux-gnu-ubuntu-14.04.tar.bz2
-Ä¿µÄÎÄ¼ş¼Ğ£º.vim/bundle/YouCompleteMe/third_party/ycmd/clang_archives/
 
+ é…ç½®YouCompleteMeï¼ˆc++ï¼‰
 
-	* ÏÂÔØCMake£¨yum°²×°µÄ2.8°æ±¾²»ĞĞ£©
 
+    
+    ç¼–è¾‘~/.vimrcï¼Œå¢åŠ ä»¥ä¸‹å†…å®¹
+    let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'  "è®¾ç½®å…¨å±€é…ç½®æ–‡ä»¶çš„è·¯å¾„
+    let g:ycm_seed_identifiers_with_syntax=1" è¯­æ³•å…³é”®å­—è¡¥å…¨
+    let g:ycm_confirm_extra_conf=0  " æ‰“å¼€vimæ—¶ä¸å†è¯¢é—®æ˜¯å¦åŠ è½½ycm_extra_conf.pyé…ç½®
+    let g:ycm_key_invoke_completion = '<C-a>' " ctrl + a è§¦å‘è¡¥å…¨ï¼Œé˜²æ­¢ä¸å…¶ä»–æ’ä»¶å†²çª
+    set completeopt=longest,menu"è®©Vimçš„è¡¥å…¨èœå•è¡Œä¸ºä¸ä¸€èˆ¬IDEä¸€è‡´(å‚è€ƒVimTip1228)
+    nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> "å®šä¹‰è·³è½¬å¿«æ·é”®
 
 
 
-·ÃÎÊhttps://cmake.org/download/£¬ÎÒÕâÀïÊÇcmake-3.10.3.tar.gz
-½âÑ¹±àÒë°²×°
-tar zxvf cmake-3.10.3.tar.gz
-cd cmake-3.10.3
-./bootstrap && make && make install
+    ç¬¬ä¸€è¡Œæ‰€éœ€çš„.ycm_extra_conf.pyï¼Œå¯ä»¥ä»è‡ªå¸¦çš„å¤åˆ¶ä¸€ä»½è¿‡æ¥ï¼Œå†æ ¹æ®éœ€è¦è¿›è¡Œé…ç½®
+    cp .vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~
 
+# 2.go vimç¯å¢ƒé…ç½® #
 
+## å®‰è£… VIM-GO æ’ä»¶ ##
 
-	* ±àÒëYouCompleteMe£¨Ö§³ÖC/C++£©
 
+    è£…å¥½äº†æ’ä»¶ç®¡ç†å™¨ï¼Œå°±å¯ä»¥å¼€å§‹å®‰è£…æˆ‘ä»¬æƒ³è¦çš„æ’ä»¶äº†ã€‚è¿›å…¥ç›®å½• ~/.vim/bundle åæ‰§è¡Œå‘½ä»¤ git clone https://github.com/fatih/vim-go.gitã€‚ç¼–è¾‘ ~/.vimrc æ–‡ä»¶ï¼ŒåŠ å…¥ä»¥ä¸‹å†…å®¹ï¼ˆæœ€åä¸€è¡Œç”¨äºç¦æ­¢è‡ªåŠ¨ä¸‹è½½ï¼‰ï¼š
 
-
-
-
-cd ~/.vim/bundle/YouCompleteMe/
-./install.py --clang-completer
-±àÒëÍê³Éºó£¬Õû¸ö.vimÎÄ¼ş¼Ğ´óÔ¼350MB¡£
-Ö§³Ögolang
-./install.py --clang-completer --go-completer
-
-
-	* ÅäÖÃYouCompleteMe£¨c++£©
-
-
-
-±à¼­~/.vimrc£¬Ôö¼ÓÒÔÏÂÄÚÈİ
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'  "ÉèÖÃÈ«¾ÖÅäÖÃÎÄ¼şµÄÂ·¾¶
-let g:ycm_seed_identifiers_with_syntax=1    " Óï·¨¹Ø¼ü×Ö²¹È«
-let g:ycm_confirm_extra_conf=0  " ´ò¿ªvimÊ±²»ÔÙÑ¯ÎÊÊÇ·ñ¼ÓÔØycm_extra_conf.pyÅäÖÃ
-let g:ycm_key_invoke_completion = '<C-a>' " ctrl + a ´¥·¢²¹È«£¬·ÀÖ¹ÓëÆäËû²å¼ş³åÍ»
-set completeopt=longest,menu    "ÈÃVimµÄ²¹È«²Ëµ¥ĞĞÎªÓëÒ»°ãIDEÒ»ÖÂ(²Î¿¼VimTip1228)
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> "¶¨ÒåÌø×ª¿ì½İ¼ü
-
-
-
-µÚÒ»ĞĞËùĞèµÄ.ycm_extra_conf.py£¬¿ÉÒÔ´Ó×Ô´øµÄ¸´ÖÆÒ»·İ¹ıÀ´£¬ÔÙ¸ù¾İĞèÒª½øĞĞÅäÖÃ
-cp .vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~
-
-2.go vim»·¾³ÅäÖÃ
-
-	* °²×° VIM-GO ²å¼ş
-
-
-    ×°ºÃÁË²å¼ş¹ÜÀíÆ÷£¬¾Í¿ÉÒÔ¿ªÊ¼°²×°ÎÒÃÇÏëÒªµÄ²å¼şÁË¡£½øÈëÄ¿Â¼ ~/.vim/bundle ºóÖ´ĞĞÃüÁî git clone https://github.com/fatih/vim-go.git¡£±à¼­ ~/.vimrc ÎÄ¼ş£¬¼ÓÈëÒÔÏÂÄÚÈİ£¨×îºóÒ»ĞĞÓÃÓÚ½ûÖ¹×Ô¶¯ÏÂÔØ£©£º
-
-syntax enable
-filetype plugin on
-set number
-let g:go_disable_autoinstall = 0´ËÊ±£¬²å¼ş±¾ÉíÒÑ¾­°²×°Íê³É£¬Äã¿ÉÒÔ¸ù¾İ github.com/fatih/vim-go µÄËµÃ÷½øĞĞÊ¹ÓÃ£¬ÆäÖĞÒªÖ¸³öµÄÊÇ <C-x><C-o> Îª´úÂë²¹È«ÌáÊ¾£¬ÇÒÒ»°ãĞèÒªÔÚÊäÈë . ²Ù×÷·ûÖ®ºóÊ¹ÓÃ
-
-	* 
-°²×° tagbar
-
-
-
-        Ê×ÏÈ¹û¶ÏµÄÄãĞèÒªÏÈ°²×° ctags£¬ÎÒÊÇ Mac ËùÒÔÓÃµÄ brew install ctags ¾Í¸ã¶¨ÁË¡£
-        È»ºó go get -u github.com/jstemmer/gotags °²×° Go ÓïÑÔµÄÏà¹Ø½âÎöÆ÷¡£
-        ½Ó×ÅÔÚÄãµÄ ~/.vimrc ÎÄ¼ş¼ÓÈëÒÔÏÂÄÚÈİ£º
-
-
-
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-
-ÊÇÊ±ºò×° tagbar ²å¼şÁË£¬ºÍ°²×° VIM-GO Ò»Ñù£¬Ê×ÏÈ½øÈë ~/.vim/bundle Ä¿Â¼¡£È»ºóÖ´ĞĞ     ¡£
-±à¼­ ~/.vimrc ÎÄ¼ş£¬¼ÓÈëĞĞ nmap <F8> :TagbarToggle<CR>¡£ÕâÊÇ¸ö¿ì½İ¼üÓ³Éä£¬Äã¿ÉÒÔ°Ñ F8 »»³ÉÈÎÒâµÄ¡£
-
-	* °²×°Ä¿Â¼ä¯ÀÀÆ÷ nerdtree
-
-
-½øÈëÄ¿Â¼ ~/.vim/bundle ºóÖ´ĞĞÃüÁî git clone https://github.com/scrooloose/nerdtree.git
-±à¼­ ~/.vimrc ÎÄ¼ş£¬¼ÓÈëĞĞ map <C-n> :NERDTreeToggle<CR>¡£Èç´ËÒ»À´£¬µ±ÄãĞèÒªä¯ÀÀÄ¿Â¼µÄÊ±ºò£¬¾Í¿ÉÒÔÊ¹ÓÃ¿ì½İ¼ü <Ctrl+n> À´µ÷³öä¯ÀÀ´°¿ÚÁË¡£
-
-
-	* 
-¸ü»»vimÖ÷Ìâ
-
-
-
-	* 
-vimrc ÅäÖÃ
-
-
-
-    ½øÈëÄ¿Â¼~/.vim/
-    git clone https://github.com/tengskyline/vim-monokai.git
-
-    ±à¼­ ~/.vimrc ÎÄ¼ş Ìí¼ÓÈçÏÂ
     syntax enable
-    colorscheme monokai
+    filetype plugin on
+    set number
+    let g:go_disable_autoinstall = 0æ­¤æ—¶ï¼Œæ’ä»¶æœ¬èº«å·²ç»å®‰è£…å®Œæˆï¼Œä½ å¯ä»¥æ ¹æ® github.com/fatih/vim-go çš„è¯´æ˜è¿›è¡Œä½¿ç”¨ï¼Œå…¶ä¸­è¦æŒ‡å‡ºçš„æ˜¯ <C-x><C-o> ä¸ºä»£ç è¡¥å…¨æç¤ºï¼Œä¸”ä¸€èˆ¬éœ€è¦åœ¨è¾“å…¥ . æ“ä½œç¬¦ä¹‹åä½¿ç”¨
+
+	
+## å®‰è£… tagbar ##
 
 
-syntax enable
-colorscheme monokai
 
-"filetype off                  " required  
-set nocompatible              " be iMproved, required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
-Plugin 'scrooloose/nerdtree'
-Bundle 'majutsushi/tagbar'  
-call vundle#end()            " required
-filetype plugin indent on    " required
+        é¦–å…ˆæœæ–­çš„ä½ éœ€è¦å…ˆå®‰è£… ctagsï¼Œæˆ‘æ˜¯ Mac æ‰€ä»¥ç”¨çš„ brew install ctags å°±æå®šäº†ã€‚
+        ç„¶å go get -u github.com/jstemmer/gotags å®‰è£… Go è¯­è¨€çš„ç›¸å…³è§£æå™¨ã€‚
+        æ¥ç€åœ¨ä½ çš„ ~/.vimrc æ–‡ä»¶åŠ å…¥ä»¥ä¸‹å†…å®¹ï¼š
 
-set number
-let g:go_fmt_command = "goimports"
-let g:tagbar_type_go = {
+
+
+
+    let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
+    \ 'kinds' : [
+    \ 'p:package',
+    \ 'i:imports:1',
+    \ 'c:constants',
+    \ 'v:variables',
+    \ 't:types',
+    \ 'n:interfaces',
+    \ 'w:fields',
+    \ 'e:embedded',
+    \ 'm:methods',
+    \ 'r:constructor',
+    \ 'f:functions'
     \ ],
     \ 'sro' : '.',
     \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
+    \ 't' : 'ctype',
+    \ 'n' : 'ntype'
     \ },
     \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
+    \ 'ctype' : 't',
+    \ 'ntype' : 'n'
     \ },
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
     \ }
 
-" ycm setting
-" ÈÃvimµÄ²¹È«²Ëµ¥ĞĞÎªÓëÒ»°ãIDEÒ»ÖÂ
-set completeopt=longest,menu
-"Àë¿ª²åÈëÄ£Ê½ºó×Ô¶¯¹Ø±ÕÔ¤ÀÀ´°¿Ú
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif\
-"»Ø³µ¼´Ñ¡ÖĞµ±Ç°Ïî
-inoremap <expr> <CR>    pumvisible()?"\<C-y>":"<CR>"
-"ÉÏÏÂ×óÓÒ¼üµÄĞĞÎª »áÏÔÊ¾ÆäËûĞÅÏ¢
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-"youcompleteme  Ä¬ÈÏtab  s-tab ºÍ×Ô¶¯²¹È«³åÍ»
-"
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-" ¿ªÆô YCM »ùÓÚ±êÇ©ÒıÇæ
-let g:ycm_collect_identifiers_from_tag_files = 1
-" ´ÓµÚ2¸ö¼üÈë×Ö·û¾Í¿ªÊ¼ÂŞÁĞÆ¥ÅäÏî
-let g:ycm_min_num_of_chars_for_completion=2
-"" ½ûÖ¹»º´æÆ¥ÅäÏî,Ã¿´Î¶¼ÖØĞÂÉú³ÉÆ¥ÅäÏî(»á³öÏÖ¶à´ò×Ö·ûµÄbug)
-"let g:ycm_cache_omnifunc=0
-" Óï·¨¹Ø¼ü×Ö²¹È«
-let g:ycm_seed_identifiers_with_syntax = 0
-let g:ycm_confirm_extra_conf=0
-let g:ycm_key_invoke_completion = '<C-/>'
-" ÔÚ½ÓÊÜ²¹È«ºó²»·ÖÁÑ³öÒ»¸ö´°¿ÚÏÔÊ¾½ÓÊÜµÄÏî
-set completeopt-=preview
-"force recomile with syntastic
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-"ÔÚ×¢ÊÍÊäÈëÖĞÒ²ÄÜ²¹È«
-let g:ycm_complete_in_comments = 1
-"ÔÚ×Ö·û´®ÊäÈëÖĞÒ²ÄÜ²¹È«
-let g:ycm_complete_in_strings = 1
-"×¢ÊÍºÍ×Ö·û´®ÖĞµÄÎÄ×ÖÒ²»á±»ÊÕÈë²¹È«
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-"ÉèÖÃerrorºÍwarningµÄÌáÊ¾·û£¬Èç¹ûÃ»ÓĞÉèÖÃ£¬ycm»áÒÔsyntasticµÄg:syntastic_warning_symbol
-"ºÍ g:syntastic_error_symbol ÕâÁ½¸öÎª×¼
-let g:ycm_error_symbol='>>'
-let g:ycm_warning_symbol='>*'
-"ÉèÖÃÌø×ªµÄ¿ì½İ¼ü£¬¿ÉÒÔÌø×ªµ½definitionºÍdeclaration
-"nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
-"nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-"nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_add_preview_to_completeopt = 0
-"enter Ö®ºóÍÆ³ö²¹È«
-let g:ycm_key_list_stop_completion = ['<CR>']
 
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_version_warning = 0
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-"¹â±êÒÆ¶¯Î»ÖÃµ¥´Ê¸ßÁÁ
-let g:go_auto_sameids = 1
+    æ˜¯æ—¶å€™è£… tagbar æ’ä»¶äº†ï¼Œå’Œå®‰è£… VIM-GO ä¸€æ ·ï¼Œé¦–å…ˆè¿›å…¥ ~/.vim/bundle ç›®å½•ã€‚ç„¶åæ‰§è¡Œ ã€‚
+    ç¼–è¾‘ ~/.vimrc æ–‡ä»¶ï¼ŒåŠ å…¥è¡Œ nmap <F8> :TagbarToggle<CR>ã€‚è¿™æ˜¯ä¸ªå¿«æ·é”®æ˜ å°„ï¼Œä½ å¯ä»¥æŠŠ F8 æ¢æˆä»»æ„çš„ã€‚
 
-" ½â¾ö²åÈëÄ£Ê½ÏÂdelete/backspce¼üÊ§Ğ§ÎÊÌâ
-set backspace=2
+## å®‰è£…ç›®å½•æµè§ˆå™¨ nerdtree ##
 
-let NERDTreeIgnore=['\.o$', '\.ko$', '\.so$', '\.a$', '\.swp$', '\.bak$', '\~$']
-let NERDTreeSortOrder=['\/$', 'Makefile', '\.c$', '\.cc$', '\.cpp$', '\.h$', '*', '\~$']
-let NERDTreeMinimalUI=1
-let NERDTreeQuitOnOpen=1
+
+è¿›å…¥ç›®å½• ~/.vim/bundle åæ‰§è¡Œå‘½ä»¤ git clone https://github.com/scrooloose/nerdtree.git
+ç¼–è¾‘ ~/.vimrc æ–‡ä»¶ï¼ŒåŠ å…¥è¡Œ map <C-n> :NERDTreeToggle<CR>ã€‚å¦‚æ­¤ä¸€æ¥ï¼Œå½“ä½ éœ€è¦æµè§ˆç›®å½•çš„æ—¶å€™ï¼Œå°±å¯ä»¥ä½¿ç”¨å¿«æ·é”® <Ctrl+n> æ¥è°ƒå‡ºæµè§ˆçª—å£äº†ã€‚
 
 
 
-nmap <F8> :TagbarToggle<CR>
-map <F5> :NERDTreeToggle<CR>
-map <F7> :GoReferrers<CR>
-"imap <F6> <C-x><C-o>
+## æ›´æ¢vimä¸»é¢˜ ##
+
+
+
+
+    vimrc é…ç½®
+
+    è¿›å…¥ç›®å½•~/.vim/
+    git clone https://github.com/tengskyline/vim-monokai.git
+
+    ç¼–è¾‘ ~/.vimrc æ–‡ä»¶ æ·»åŠ å¦‚ä¸‹
+    syntax enable
+    colorscheme monokai
+
+#  vimrc æœ€ç»ˆé…ç½®  #
+    syntax enable
+    colorscheme monokai
+    
+    "filetype off  " required  
+    set nocompatible  " be iMproved, required
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'Valloric/YouCompleteMe'
+    Plugin 'fatih/vim-go'
+    Plugin 'scrooloose/nerdtree'
+    Bundle 'majutsushi/tagbar'  
+    call vundle#end()" required
+    filetype plugin indent on" required
+    
+    set number
+    let g:go_fmt_command = "goimports"
+    let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds' : [
+    \ 'p:package',
+    \ 'i:imports:1',
+    \ 'c:constants',
+    \ 'v:variables',
+    \ 't:types',
+    \ 'n:interfaces',
+    \ 'w:fields',
+    \ 'e:embedded',
+    \ 'm:methods',
+    \ 'r:constructor',
+    \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+    \ 't' : 'ctype',
+    \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+    \ 'ctype' : 't',
+    \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+    
+    " ycm setting
+    " è®©vimçš„è¡¥å…¨èœå•è¡Œä¸ºä¸ä¸€èˆ¬IDEä¸€è‡´
+    set completeopt=longest,menu
+    "ç¦»å¼€æ’å…¥æ¨¡å¼åè‡ªåŠ¨å…³é—­é¢„è§ˆçª—å£
+    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif\
+    "å›è½¦å³é€‰ä¸­å½“å‰é¡¹
+    inoremap <expr> <CR>pumvisible()?"\<C-y>":"<CR>"
+    "ä¸Šä¸‹å·¦å³é”®çš„è¡Œä¸º ä¼šæ˜¾ç¤ºå…¶ä»–ä¿¡æ¯
+    inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+    inoremap <expr> <Up>   pumvisible() ? "\<C-p>" : "\<Up>"
+    inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+    inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+    "youcompleteme  é»˜è®¤tab  s-tab å’Œè‡ªåŠ¨è¡¥å…¨å†²çª
+    "
+    let g:ycm_key_list_select_completion = ['<Down>']
+    let g:ycm_key_list_previous_completion = ['<Up>']
+    let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+    " å¼€å¯ YCM åŸºäºæ ‡ç­¾å¼•æ“
+    let g:ycm_collect_identifiers_from_tag_files = 1
+    " ä»ç¬¬2ä¸ªé”®å…¥å­—ç¬¦å°±å¼€å§‹ç½—åˆ—åŒ¹é…é¡¹
+    let g:ycm_min_num_of_chars_for_completion=2
+    "" ç¦æ­¢ç¼“å­˜åŒ¹é…é¡¹,æ¯æ¬¡éƒ½é‡æ–°ç”ŸæˆåŒ¹é…é¡¹(ä¼šå‡ºç°å¤šæ‰“å­—ç¬¦çš„bug)
+    "let g:ycm_cache_omnifunc=0
+    " è¯­æ³•å…³é”®å­—è¡¥å…¨
+    let g:ycm_seed_identifiers_with_syntax = 0
+    let g:ycm_confirm_extra_conf=0
+    let g:ycm_key_invoke_completion = '<C-/>'
+    " åœ¨æ¥å—è¡¥å…¨åä¸åˆ†è£‚å‡ºä¸€ä¸ªçª—å£æ˜¾ç¤ºæ¥å—çš„é¡¹
+    set completeopt-=preview
+    "force recomile with syntastic
+    nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+    "åœ¨æ³¨é‡Šè¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
+    let g:ycm_complete_in_comments = 1
+    "åœ¨å­—ç¬¦ä¸²è¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
+    let g:ycm_complete_in_strings = 1
+    "æ³¨é‡Šå’Œå­—ç¬¦ä¸²ä¸­çš„æ–‡å­—ä¹Ÿä¼šè¢«æ”¶å…¥è¡¥å…¨
+    let g:ycm_collect_identifiers_from_comments_and_strings = 0
+    "è®¾ç½®errorå’Œwarningçš„æç¤ºç¬¦ï¼Œå¦‚æœæ²¡æœ‰è®¾ç½®ï¼Œycmä¼šä»¥syntasticçš„g:syntastic_warning_symbol
+    "å’Œ g:syntastic_error_symbol è¿™ä¸¤ä¸ªä¸ºå‡†
+    let g:ycm_error_symbol='>>'
+    let g:ycm_warning_symbol='>*'
+    "è®¾ç½®è·³è½¬çš„å¿«æ·é”®ï¼Œå¯ä»¥è·³è½¬åˆ°definitionå’Œdeclaration
+    "nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
+    "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+    "nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    let g:ycm_show_diagnostics_ui = 0
+    let g:ycm_add_preview_to_completeopt = 0
+    "enter ä¹‹åæ¨å‡ºè¡¥å…¨
+    let g:ycm_key_list_stop_completion = ['<CR>']
+    
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_operators = 1
+    let g:go_highlight_build_constraints = 1
+    let g:go_version_warning = 0
+    let g:go_highlight_extra_types = 1
+    let g:go_highlight_fields = 1
+    let g:go_highlight_types = 1
+    "å…‰æ ‡ç§»åŠ¨ä½ç½®å•è¯é«˜äº®
+    let g:go_auto_sameids = 1
+    
+    " è§£å†³æ’å…¥æ¨¡å¼ä¸‹delete/backspceé”®å¤±æ•ˆé—®é¢˜
+    set backspace=2
+    
+    let NERDTreeIgnore=['\.o$', '\.ko$', '\.so$', '\.a$', '\.swp$', '\.bak$', '\~$']
+    let NERDTreeSortOrder=['\/$', 'Makefile', '\.c$', '\.cc$', '\.cpp$', '\.h$', '*', '\~$']
+    let NERDTreeMinimalUI=1
+    let NERDTreeQuitOnOpen=1
+    
+    
+    
+    nmap <F8> :TagbarToggle<CR>
+    map <F5> :NERDTreeToggle<CR>
+    map <F7> :GoReferrers<CR>
+    "imap <F6> <C-x><C-o>
 
 
 
