@@ -74,7 +74,7 @@ let g:ycm_key_invoke_completion = '<C-/>'
 " 在接受补全后不分裂出一个窗口显示接受的项
 set completeopt-=preview
 "force recomile with syntastic
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+"  nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 "在注释输入中也能补全
 let g:ycm_complete_in_comments = 1
 "在字符串输入中也能补全
@@ -108,6 +108,12 @@ let g:go_auto_sameids = 1
 
 " 解决插入模式下delete/backspce键失效问题
 set backspace=2
+
+"设置高亮行和列
+"set cursorcolumn
+set cursorline
+"highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+"highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
 
 let NERDTreeIgnore=['\.o$', '\.ko$', '\.so$', '\.a$', '\.swp$', '\.bak$', '\~$']
 let NERDTreeSortOrder=['\/$', 'Makefile', '\.c$', '\.cc$', '\.cpp$', '\.h$', '*', '\~$']
